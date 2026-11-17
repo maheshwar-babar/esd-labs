@@ -20,6 +20,22 @@ export default function App() {
     setMatrix(current=>incrementAt(current,row,col));
   }
 
+  useEffect(() => {
+    async function loadMatrix() {
+      const response = await fetch("/matrix.json");
+      if (!response.ok) {
+        throw new Error(`Failed to load matrix: ${response.status}`);
+      }
+  
+      const data = await response.json();
+      setMatrix(data);
+    }
+  
+    loadMatrix().catch((error) => {
+      console.error("Could not load /matrix.json:", error);
+    });
+  }, []);
+
   return (
     <main className="app">
       <Header />
