@@ -16,10 +16,14 @@ export default function App() {
 
   const [matrix, setMatrix] = useState(START);
 
+  function increment(row,col){
+    setMatrix(current=>incrementAt(current,row,col));
+  }
+
   return (
     <main className="app">
       <Header />
-      <Matrix matrix={matrix}/>
+      <Matrix matrix={matrix} onIncrement={increment}/>
     </main>
   );
 }
